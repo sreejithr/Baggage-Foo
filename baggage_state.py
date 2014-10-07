@@ -32,10 +32,10 @@ class BaggageState(object):
         if type(key) is not int or key < 0:
             raise
 
-        if len(state[key:key+self.bins_per_cart]) < 2:
+        if len(self.state[key:key+self.bins_per_cart]) < 2:
             raise
         else:
-            return state[key:key+self.bins_per_cart]
+            return self.state[key:key+self.bins_per_cart]
 
     def __iter__(self):
         i = 0
