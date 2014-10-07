@@ -21,6 +21,13 @@ class BaggageState(object):
             if each != self.empty_token:
                 return False
         return True
+
+    def move_baggage(self, src, dest):
+        self.state[dest:dest+self.bins_per_cart] =\
+                                self.state[src:src+self.bins_per_cart]
+        self.state[dest:dest+self.bins_per_cart] =\
+                                [self.empty_token] * self.bins_per_cart
+
     def __getitem__(self, key):
         if type(key) is not int or key < 0:
             raise
