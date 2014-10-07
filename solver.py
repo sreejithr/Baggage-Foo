@@ -20,5 +20,11 @@ class Astar(object):
         self.to_visit = []
         self.cost_so_far = {self.start: 0}
         self.came_from = {self.start: None}
+    def heuristic(self, state):
+        return 1
+
+    def _add_to_open_set(self, state, priority):
+        heappush(self.to_visit, (priority, state))
+
     pass
 
