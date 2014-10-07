@@ -20,8 +20,17 @@ class TestBaggageState(unittest.TestCase):
         self.assertEqual(self.b_state[5], ['B', 'A'])
 
     def test_empty_checking(self):
+        # Empty position
         self.assertTrue(self.b_state.is_empty_at_index(1))
+        # Non-empty position
         self.assertFalse(self.b_state.is_empty_at_index(6))
+        # Check at the end where there aren't 2 bins. This should raise exception
+        success = True
+        try:
+            self.b_state.is_empty_at_index(8)
+        except:
+            success = False
+        self.assertFalse(success)
 
     def test_baggage_movement(self):
         # Test movement to start
