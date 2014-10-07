@@ -1,11 +1,8 @@
 """
-Baggage Bin Problem Solver
---------------------------
+Baggage Bin Problem using A* Algorithm
+--------------------------------------
 @author: Sreejith R
 """
-class BaggageState(object):
-    """
-    Represents state of baggage bins.
-    """
+from .state import BaggageState
     pass
 
