@@ -59,6 +59,9 @@ class BaggageState(object):
                 yield bins
             i += 1
 
+    def __eq__(self, other):
+        return self.configuration == other.configuration
+
     def __str__(self):
         return ''.join(self.configuration)
 
