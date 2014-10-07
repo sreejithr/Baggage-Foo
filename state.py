@@ -12,12 +12,13 @@ class BaggageState(object):
         self.bins_per_cart = bins_per_cart
         self.empty_token = empty_space_token
 
+    # TODO: See if required
     @property
     def count(self):
-        return len(self.state)
+        return len(self.configuration)
 
     def is_empty_at_index(self, index):
-        for each in self.state[index:index+self.bins_per_cart]:
+        for each in self.configuration[index:index+self.bins_per_cart]:
             if each != self.empty_token:
                 return False
         return True
