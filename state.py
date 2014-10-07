@@ -53,7 +53,15 @@ class BaggageState(object):
 
     def __iter__(self):
         i = 0
-        while i < len(self.state):
-            yield self.state[i:i+self.bins_per_cart]
-            i += self.bins_per_cart
+        while i < len(self.configuration):
+            bins = self.configuration[i:i+self.bins_per_cart]
+            if len(bins) == self.bins_per_cart:
+                yield bins
+            i += 1
+
+    def __str__(self):
+        return ''.join(self.configuration)
+
+    def __repr__(self):
+        return ''.join(self.configuration)
 
