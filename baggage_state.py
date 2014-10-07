@@ -11,6 +11,16 @@ class BaggageState(object):
         self.state = state
         self.bins_per_cart = bins_per_cart
         self.empty_token = empty_space_token
+
+    @property
+    def count(self):
+        return len(self.state)
+
+    def is_empty_at_index(self, index):
+        for each in self.state[index:index+self.bins_per_cart]:
+            if each != self.empty_token:
+                return False
+        return True
     def __getitem__(self, key):
         if type(key) is not int or key < 0:
             raise
