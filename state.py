@@ -36,10 +36,11 @@ class BaggageState(object):
             self.configuration.insert(index+offset, value[offset])
 
     def move_baggage(self, src, dest):
-        self.state[dest:dest+self.bins_per_cart] =\
-                                self.state[src:src+self.bins_per_cart]
-        self.state[dest:dest+self.bins_per_cart] =\
-                                [self.empty_token] * self.bins_per_cart
+        # Replace destination with value of source
+        self.replace(dest, self.configuration[src:src+self.bins_per_cart])
+
+        # Replace source with empty space tokens
+        self.replace(src, [self.empty_token] * self.bins_per_cart)
 
     def __getitem__(self, key):
         if type(key) is not int or key < 0:
