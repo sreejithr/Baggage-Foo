@@ -7,10 +7,12 @@ class BaggageState(object):
     """
     Represents state of baggage bins.
     """
-    def __init__(self, configuration, bins_per_cart=2, empty_space_token='*'):
+    def __init__(self, configuration, moves, bins_per_cart=2,
+                 empty_space_token='*'):
         self.configuration = list(configuration)
         self.bins_per_cart = bins_per_cart
         self.empty_token = empty_space_token
+        self.moves = moves
 
     # TODO: See if required
     @property
