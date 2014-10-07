@@ -29,3 +29,4 @@ class BaggageManager(object):
                 for dest, _ in enumerate(state):
                     new_state = make_new_state(state, src, dest)
                     yield new_state
+
