@@ -42,3 +42,4 @@ class BaggageState(object):
         while i < len(self.state):
             yield self.state[i:i+self.bins_per_cart]
             i += self.bins_per_cart
+
