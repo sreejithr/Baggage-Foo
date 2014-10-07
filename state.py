@@ -44,6 +44,9 @@ class BaggageState(object):
         # Replace source with empty space tokens
         self.replace(src, [self.empty_token] * self.bins_per_cart)
 
+        # Record the moves that led to this state
+        self.src, self.dest = src, dest
+
     def __getitem__(self, key):
         if type(key) is not int or key < 0:
             raise
