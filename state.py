@@ -18,10 +18,22 @@ class BaggageState(object):
         return len(self.configuration)
 
     def is_empty_at_index(self, index):
-        for each in self.configuration[index:index+self.bins_per_cart]:
+        bins = self.configuration[index:index+self.bins_per_cart]
+        if len(bins) != self.bins_per_cart:
+            raise
+
+        for each in bins:
             if each != self.empty_token:
                 return False
         return True
+
+    def replace(self, index, value):
+        if len(value) != self.bins_per_cart:
+            raise
+
+        for offset in range(self.bins_per_cart):
+            del self.configuration[index+offset]
+            self.configuration.insert(index+offset, value[offset])
 
     def move_baggage(self, src, dest):
         self.state[dest:dest+self.bins_per_cart] =\
