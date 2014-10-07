@@ -25,7 +25,7 @@ class BaggageManager(object):
         # For each node, generate all possible single moves
         def make_new_state(state, src, dest):
             if self._is_valid_dest(state, dest):
-                new_state = BaggageState(state.configuration,
+                new_state = BaggageState(state.configuration, state.moves+1,
                                          state.bins_per_cart)
                 new_state.move_baggage(src, dest)
                 return new_state
