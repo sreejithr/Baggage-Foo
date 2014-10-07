@@ -35,5 +35,6 @@ class BaggageManager(object):
             if self._is_valid_src(state, src):
                 for dest, _ in enumerate(state):
                     new_state = make_new_state(state, src, dest)
-                    yield new_state
+                    if new_state:
+                        yield new_state
 
