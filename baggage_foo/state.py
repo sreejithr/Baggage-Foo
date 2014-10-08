@@ -73,10 +73,10 @@ class BaggageState(object):
         if type(key) is not int or key < 0:
             raise # TODO Custom exception
 
-        if len(self.state[key:key+self.bins_per_cart]) < 2:
+        if len(self.configuration[key:key+self.bins_per_cart]) < 2:
             raise # TODO Custom exception
         else:
-            return self.state[key:key+self.bins_per_cart]
+            return self.configuration[key:key+self.bins_per_cart]
 
     def __iter__(self):
         """
