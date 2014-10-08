@@ -12,6 +12,9 @@ EMPTY_SPACE_TOKEN = '*'
 
 
 class Solver(object):
+    """
+    Runs the A* algorithm to find the optimum moves.
+    """
     def __init__(self, start):
         self.start = start
         self.goal = None
@@ -22,12 +25,25 @@ class Solver(object):
         self.came_from = {self.start.text: None}
 
     def heuristic(self, state):
+        """
+        Lesser the heuristic, closer the given state is to the goal. Uses
+        Manhattan distance.
+        
+        :type return: int
+        """
         return self.baggage_manager.distance_from_goal(state)
 
     def _add_to_open_set(self, state, priority):
+        """
+        Open set is a priority queue maintained as a heap.
+        """
         heappush(self.to_visit, (priority, state))
 
     def shortest_path_to_goal(self):
+        """
+        Finds the shortest path and returns the optimum moves as tuples. Eg:
+        
+        """
         # Traverse the states
         self._traverse()
 
