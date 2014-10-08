@@ -24,21 +24,52 @@ class BaggageManager(object):
             self.desired_arrangement.extend([bin_label] * self.num_of_bin_sets)
 
     def _is_valid_src(self, state, index):
+        """
+        Moving empty spaces don't make any sense. So, empty spaces are invalid
+        sources. This method returns whether a valid source exists at given index
+
+        :type return: Boolean
+        """
         try:
             return not state.is_empty_at_index(index)
         except: # TODO: Catch custom exception
             return False
 
     def _is_valid_dest(self, state, index):
+        """
+        Moving to non-empty spots don't make any sense. So, non-empty spots are
+        invalid destinations. This method returns whether a valid destination
+        exists at given index
+
+        :type return: Boolean
+        """
         try:
             return state.is_empty_at_index(index)
         except: # TODO: Catch custom exception
             return False
 
     def is_goal(self, state):
+        """
+        Returns whether given state can be considered as a goal state. Following
+        are goal states.
+
+        ****AABB
+        **AABB**
+        AABB****
+
+        where '*' is an empty space.
+
+        :type return: Boolean
+        """
         return ''.join(self.desired_arrangement) in state.text
 
     def distance_from_goal(self, state):
+        """
+        Returns the Hamming distance between given state and the closest goal
+        state
+
+        :type return: int
+        """
         empty_finder_regex = re.compile('\{}'.format(state.empty_token))
         possible_goal = ['*'] * len(empty_finder_regex.findall(state.text))
         possible_goal += self.desired_arrangement
@@ -52,6 +83,11 @@ class BaggageManager(object):
         return distance
 
     def next_possible_states(self, state):
+        """
+        Given a state, it returns all states possible through single moves.
+
+        :type return: Generator
+        """
         # For each node, generate all possible single moves
         def make_new_state(state, src, dest):
             if self._is_valid_dest(state, dest):
