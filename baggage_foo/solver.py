@@ -4,11 +4,7 @@ Baggage Bin Problem using A* Algorithm
 @author: Sreejith R
 """
 from heapq import heappush
-
-from .state import BaggageState
 from .manager import BaggageManager
-
-EMPTY_SPACE_TOKEN = '*'
 
 
 class Solver(object):
@@ -27,7 +23,7 @@ class Solver(object):
     def heuristic(self, state):
         """
         Lesser the heuristic, closer the given state is to the goal. Uses
-        Manhattan distance.
+        Hamming distance.
         
         :type return: int
         """
@@ -41,7 +37,7 @@ class Solver(object):
 
     def shortest_path_to_goal(self):
         """
-        Finds the shortest path and returns the optimum moves as tuples. Eg:
+        Finds the shortest path and returns the optimum moves as tuples.
         
         """
         # Traverse the states
