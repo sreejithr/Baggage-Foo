@@ -9,3 +9,8 @@ How to run
 2. Type `python -m runner <number_of_baggage_bins>`
 
 Eg: A set of bins (BA) is considered a baggage bin. So, `****BABA` (where * is empty space) has `number_of_baggage_bins` as `2`.
+
+TODO
+---
+1. Raise custom exceptions.
+2. Further optimization by de-duplicating the open-set (will reduce A* traversal)
