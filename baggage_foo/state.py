@@ -5,7 +5,14 @@ BaggageState
 """
 class BaggageState(object):
     """
-    Represents state of baggage bins.
+    Represents state of baggage bins. Configuration is a mandatory argument to
+    initialize. It is a list form of the state.
+
+    Example configuration:
+        ['*', '*', '*', '*', 'B', 'A', 'B', 'A']
+
+    where '*' is empty space. You can specify custom empty space token using
+    `empty_space_token`
     """
     def __init__(self, configuration, moves=0, bins_per_cart=2,
                  empty_space_token='*'):
@@ -15,13 +22,18 @@ class BaggageState(object):
         self.moves = moves
         self.src, self.dest = None, None
 
-    # TODO: See if required
     @property
     def num_of_bin_sets(self):
+        """
+        Set of bins is a bin set. For eg, BA is a bin set.
+        """
         num_of_baggages = len(self.configuration)/2
         return num_of_baggages/self.bins_per_cart
 
     def is_empty_at_index(self, index):
+        """
+        Checks whether the bin set at given index is empty. For eg, '**' is empty.
+        """
         bins = self.configuration[index:index+self.bins_per_cart]
         if len(bins) != self.bins_per_cart:
             raise
@@ -55,15 +67,21 @@ class BaggageState(object):
         return ''.join(self.configuration)
 
     def __getitem__(self, key):
+        """
+        To support indexing like in a list
+        """
         if type(key) is not int or key < 0:
-            raise
+            raise # TODO Custom exception
 
         if len(self.state[key:key+self.bins_per_cart]) < 2:
-            raise
+            raise # TODO Custom exception
         else:
             return self.state[key:key+self.bins_per_cart]
 
     def __iter__(self):
+        """
+        Object can be iterated. Yields self.configuration one by one
+        """
         i = 0
         while i < len(self.configuration):
             bins = self.configuration[i:i+self.bins_per_cart]
