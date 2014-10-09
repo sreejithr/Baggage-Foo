@@ -33,7 +33,18 @@ class Solver(object):
         """
         Open set is a priority queue maintained as a heap.
         """
-        heappush(self.to_visit, (priority, state))
+        duplicates = [state]
+        offset = 0
+        try:
+            while True:
+                offset = self.to_visit.index(state+offset)
+                duplicates.append(self.to_visit[offset])
+                del self.to_visit[offset]
+        except:
+            pass
+
+        state_to_keep = min(duplicates)
+        heappush(self.to_visit, (priority, state_to_keep))
 
     def shortest_path_to_goal(self):
         """
@@ -81,4 +92,3 @@ class Solver(object):
                     closed_set.append(next.text)
                     priority = new_cost + self.heuristic(next)
                     self._add_to_open_set(next, priority)
-
